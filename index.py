@@ -65,7 +65,7 @@ def print_growth_rates(growth_rates):
 #3b explain how such analysis adds value to the analysis.
 # Quarterly growth rates allow you to identify trends in sales performance. Positive growth rates indicate increasing sales, while negative growth rates suggest declining sales. By examining these trends, you can understand how sales are evolving over time and whether there are any notable fluctuations or patterns.
 #Assessing Performance: Comparing growth rates across different quarters provides insights into the relative performance of each period. For example, if sales growth accelerates in a particular quarter compared to the previous one, it may indicate successful marketing campaigns or seasonal factors driving increased demand.
-#Forecasting: Analyzing historical growth rates enables you to make informed predictions about future sales performance. By extrapolating trends from past growth rates, you can estimate future sales levels and adjust business strategies accordingly.
+#Forecasting: Analyzing historical growth rates enables you to make informed predictions about future sales performance. By knowing the trends from past growth rates, you can estimate future sales levels and adjust business strategies accordingly.
 
             
 # Main function
