@@ -51,7 +51,7 @@ def get_quarter(month_name):
 # Function to print profit table and summary insights
 def print_profit_table_and_summary(avg_sales_pivot):
     # 1. Print profit table
-    print("_______________________________________________________________________________________________________________")
+    print("____________________________________________________________________________________________________")
     print("| Country                        | Quarter 1 | Quarter 2 | Quarter 3 | Quarter 4 | Total           |")
     print("|--------------------------------|-----------|-----------|-----------|-----------|-----------------|")
     for country, quarters in avg_sales_pivot.items():
