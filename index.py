@@ -54,17 +54,29 @@ def print_profit_table_and_summary(avg_sales_pivot):
     print("____________________________________________________________________________________________________")
     print("| Country                        | Quarter 1 | Quarter 2 | Quarter 3 | Quarter 4 | Total           |")
     print("|--------------------------------|-----------|-----------|-----------|-----------|-----------------|")
+    total_sales_by_country = {country: sum(quarters.values()) for country, quarters in avg_sales_pivot.items()}
     for country, quarters in avg_sales_pivot.items():
         total_sales = sum(quarters.values())
-        print(f"| {country:<30} | {quarters.get('Q1', 0):<9.2f} | {quarters.get('Q2', 0):<9.2f} | {quarters.get('Q3', 0):<9.2f} | {quarters.get('Q4', 0):<9.2f} | {total_sales:<15.2f} |")
+        q1_sales = quarters['Q1'] if 'Q1' in quarters else 0
+        q2_sales = quarters['Q2'] if 'Q2' in quarters else 0
+        q3_sales = quarters['Q3'] if 'Q3' in quarters else 0
+        q4_sales = quarters['Q4'] if 'Q4' in quarters else 0
+        print(f"| {country:<30} | {q1_sales:<9.2f} | {q2_sales:<9.2f} | {q3_sales:<9.2f} | {q4_sales:<9.2f} | {total_sales:<15.2f} |")
     print("|________________________________|___________|___________|___________|___________|_________________|")
 
     # 2. Summary insights
-    total_sales_by_country = {country: sum(quarters.values()) for country, quarters in avg_sales_pivot.items()}
-    max_country = max(total_sales_by_country, key=total_sales_by_country.get)
-    min_country = min(total_sales_by_country, key=total_sales_by_country.get)
-    max_sales = total_sales_by_country[max_country]
-    min_sales = total_sales_by_country[min_country]
+    max_country = None
+    min_country = None
+    max_sales = float('-inf')
+    min_sales = float('inf')
+
+    for country, sales in total_sales_by_country.items():
+        if sales > max_sales:
+            max_sales = sales
+            max_country = country
+        if sales < min_sales:
+            min_sales = sales
+            min_country = country
 
     print("\nSummary Insights:")
     print(f"- {max_country} had the highest total sales in 2022 with a total of {max_sales:.2f}.")
@@ -78,10 +90,10 @@ def print_growth_rates(growth_rates):
         for quarter, growth_rate in growths.items():
             print(f"  - {quarter}: {growth_rate:.2f}%")
 
-# #3b explain how such analysis adds value to the analysis.
-# # Quarterly growth rates allow you to identify trends in sales performance. Positive growth rates indicate increasing sales, while negative growth rates suggest declining sales. By examining these trends, you can understand how sales are evolving over time and whether there are any notable fluctuations or patterns.
-# #Assessing Performance: Comparing growth rates across different quarters provides insights into the relative performance of each period. For example, if sales growth accelerates in a particular quarter compared to the previous one, it may indicate successful marketing campaigns or seasonal factors driving increased demand.
-# #Forecasting: Analyzing historical growth rates enables you to make informed predictions about future sales performance. By knowing the trends from past growth rates, you can estimate future sales levels and adjust business strategies accordingly.
+#3b explain how such analysis adds value to the analysis.
+# Quarterly growth rates allow you to identify trends in sales performance. Positive growth rates indicate increasing sales, while negative growth rates suggest declining sales. By examining these trends, you can understand how sales are evolving over time and whether there are any notable fluctuations or patterns.
+#Assessing Performance: Comparing growth rates across different quarters provides insights into the relative performance of each period. For example, if sales growth accelerates in a particular quarter compared to the previous one, it may indicate successful marketing campaigns or seasonal factors driving increased demand.
+#Forecasting: Analyzing historical growth rates enables you to make informed predictions about future sales performance. By knowing the trends from past growth rates, you can estimate future sales levels and adjust business strategies accordingly.
 
 # Main function
 def main():
@@ -93,3 +105,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
+#DELETE THIS PART. THIS IS JUST FOR YOUR KNOWLEDGE
+#If you use .keys(), it will return a view object that displays a list of all the keys in the dictionary. This means you would be printing the keys themselves, not the corresponding values (sales).
+#If you use .values(), it will return a view object that displays a list of all the values in the dictionary. However, it would not allow you to handle the case where a quarter is missing for a particular country.
+
+# So to solve the problem of not using .get() I used conditional statements to check if the key exists in the dictionary and then access its value if it does.
